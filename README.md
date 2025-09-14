@@ -37,7 +37,7 @@ This is an example of a record about users:
 Record title: "Users that visited us on this beautiful day"
 Metadata: {
     Date: YMD 2025 2 14
-    Time: 04:32pm
+    Time: HM 04 32 pm
 }
 Users: [
     {
