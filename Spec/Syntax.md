@@ -8,17 +8,40 @@ There are 5 types of values: dictionaries, lists, numbers, strings and keywords:
 - Lists are ordered containers of tuples.
 
 ## Dictionaries
-Dictionaries are enclosed in `{ }` and have fields named by identifiers
+Dictionaries are sets of key-value pairs, called **fields**, enclosed by `{ }`.
+Each field is named by an **identifier**
 (containing all symbols except `:` and newline,
 with the escape sequence `\` supporting any codepoint),
-followed by `:` and a *tuple* of values.
+followed by `:` and a *tuple* of **values**.
+Example:
+```meml
+Today's mentioned trivia: {
+    Mass of Earth: 5.97219_+24kg
+    Tallest statue: "Statue of Unity"
+    Most remote inhabited archipelago: "Tristan da Cunha"
+}
+```
 
-Fields are put each into its own line.
+Fields are put each into its own line. Tuples containing one value are still tuples
+and they can contain no values at all too.
+
+Whitespace around the identifiers is trimmed,
+so if you *really* need an identifier to start or end with space
+use the escape sequence `\_`.
 
 The file itself is also a dictionary, just not enclosed by `{ }`.
 
 ## Lists
-Lists are enclosed by `[ ]`. Each item starts on its own line, and is also a tuple.
+Lists are series of **items** enclosed by `[ ]`.
+Each item starts on its own line, and is also a tuple.
+Example:
+```meml
+Scores: [
+    9.8
+    8.5
+    9.1
+]
+```
 
 ## Numbers
 Numbers can be both integers and decimal (with decimal dot `.` only).
@@ -41,16 +64,31 @@ Binary, octal and hexadecimal numbers are also supported:
 - prefix `0b` starts a binary number
 - prefix `0o` starts an octal number.
   Just `0` as a prefix doesn't start an octal number, unlike common implementations.
+Example:
+```meml
+Binary sequence: 0b10_1100_0101
+```
 
 Exponents in scientific notation are always written in decimal,
 but use modify the number's significand in it's used base.
+```meml
+Big binary: 0b1_+9 # Equal to 0b10_0000_0000
+```
 
 ## Strings
 Strings are enclosed by single or double quotes.
+Example:
+```meml
+Name: "John Smith"
+```
 
 In single-quoted strings `"` character can be used unescaped,
 and in double-quoted strings `'` can be used unescaped.
 Escape sequence `\` can be used in normal strings for special characters, like newlines.
+Example:
+```meml
+Line: "John said \"Hello world!\""
+```
 
 Raw strings can be multiline. They are written with the quote character followed by a new line.
 Each line of the string needs to start indented by the same number of whitespaces as
@@ -60,17 +98,44 @@ All lines except the ones with opening and closing quotes are separate lines of 
 ending with a newline character.
 The lines are interpreted literally,
 with quotes and `\` characters just being normal characters of the string.
+Example:
+```meml
+Comment: "
+          Enjoyed the scenic route.
+          Planning to bring friends next time.
+         "
+```
+
+Note: due to some editors making it harder to control indentation
+enough that the string lines consistently align with the opening quote on a busy line,
+it is recommended to put raw string opening quotes on their own lines.
+Example:
+```meml
+Comment: \
+    "
+     Enjoyed the scenic route.
+     Planning to bring friends next time.
+    "
+```
 
 ## Keywords
 Keywords are similar to strings, but not enclosed in quotes. They are still a separate type,
 and usually used to denote the format of values, or to simplify writing of one-worded text.
 They start with a non-digit and can contain any character except the special ones used in values, `( ) [ ] { } " '` or newlines and spaces. For those characters you can use the escape sequence `\`.
+Example:
+```meml
+Blood type: AB+
+```
 
 ## Tuples
 The tuples are lists of values separated by a space ` `. All values are contained in tuples.
 It can be of any size, and contain values of any types.
 The space separating values is always required,
 even before special characters starting some values, like `[ ] { } " '`
+Example:
+```meml
+Favourite color: rgb 240 98 146
+```
 
 End of the line usually signifies the end of the tuple,
 but the escape character `\` at the line end can be used to continue the tuple on the next line.
