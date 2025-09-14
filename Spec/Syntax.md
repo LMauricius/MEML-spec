@@ -3,9 +3,7 @@
 This is a simple specification for the MEML configuration language.
 
 # Values
-There are 5 types of values: dictionaries, lists, numbers, strings and keywords:
-- Dictionaries are sets of key-value pairs. Keys are strings, mapped to tuples. The file itself is a dictionary.
-- Lists are ordered containers of tuples.
+There are 5 types of values: dictionaries, lists, numbers, strings and keywords.
 
 ## Dictionaries
 Dictionaries are sets of key-value pairs, called **fields**, enclosed by `{ }`.
@@ -51,6 +49,7 @@ Example:
 ```meml
 Long number: 1_000_000
 ```
+
 Scientific notation is used by appending the exponent after the significand.
 The exponent is appended after the last underscore `_`
 and always has either the `+` or `-` sign.
@@ -73,6 +72,16 @@ Exponents in scientific notation are always written in decimal,
 but use modify the number's significand in it's used base.
 ```meml
 Big binary: 0b1_+9 # Equal to 0b10_0000_0000
+```
+
+Numbers can have suffixes, usually used as units.
+The suffix starts with the first symbol that isn't otherwise expected at that part of the number
+and  can contain any character except the special ones used in values,
+`( ) [ ] { } " '` or newlines and spaces. For those characters you can use the escape sequence `\`.
+Example:
+```meml
+Weight: 75kg
+Distance: 5km
 ```
 
 ## Strings
@@ -121,7 +130,8 @@ Comment: \
 ## Keywords
 Keywords are similar to strings, but not enclosed in quotes. They are still a separate type,
 and usually used to denote the format of values, or to simplify writing of one-worded text.
-They start with a non-digit and can contain any character except the special ones used in values, `( ) [ ] { } " '` or newlines and spaces. For those characters you can use the escape sequence `\`.
+They start with a non-digit and can contain any character except the special ones used in values,
+`( ) [ ] { } " '` or newlines and spaces. For those characters you can use the escape sequence `\`.
 Example:
 ```meml
 Blood type: AB+
@@ -174,7 +184,8 @@ They start with a backslash `\` and can be followed by:
 - `u` and 4 hex digits - Unicode code point of the specified hexadecimal value below 0x10000 (65536)
 - `U` and 8 hex digits - Unicode code point of the specified hexadecimal value
 
-While some of these characters are supported in some places like in identifiers, they can still be written using escape sequences.
+While some of these characters are supported in some places like in identifiers,
+they can still be written using escape sequences.
 
 In raw (multiline) strings all characters are interpreted literally until the end of the line.
 That means you can't use escape sequences in those strings,
